@@ -1,0 +1,41 @@
+= simple_form_for @site do |f|
+
+  ==f.input :layout, as: :text, label: 'HTML for Layout'
+  ==f.input :layout_css, as: :text, label: 'CSS for Layout'
+  ==f.input :disable_bootstrap,
+    label: false,
+    inline_label: 'Disable ExceptTheApp Bootstrap CSS'
+  div.muted style="margin-left:20px;"
+    small
+      |
+        Tick this checkbox if you (a) already include
+        <a href="http://twitter.github.com/bootstrap/">Bootstrap</a> in the 
+        HTML/CSS above and (b) you want to use your Bootstrap styles for 
+        ExceptTheApp content.
+        Our version of Bootstrap is name spaced so it can co-exist with your
+        version.
+  
+  p
+    .actions = f.submit 'Save Layout & Preview', class: 'btn btn-primary'
+
+/ CodeMirror Stuff
+script src="/codemirror/lib/codemirror.js"
+link rel="stylesheet" href="/codemirror/lib/codemirror.css"
+link rel="stylesheet" href="/codemirror/theme/twilight.css"
+script src="/codemirror/mode/css/css.js"
+script src="/codemirror/mode/xml/xml.js"
+script src="/codemirror/mode/javascript/javascript.js"
+script src="/codemirror/mode/css/css.js"
+script src="/codemirror/mode/htmlmixed/htmlmixed.js"
+javascript:
+  CodeMirror.fromTextArea(document.getElementById('site_layout'), {
+    theme: 'twilight',
+    mode: 'htmlmixed',
+    indentWithTabs: false,
+    lineNumbers: true
+  });
+  CodeMirror.fromTextArea(document.getElementById('site_layout_css'), {
+    theme: 'twilight',
+    mode: 'css',
+    lineNumbers: true
+  });

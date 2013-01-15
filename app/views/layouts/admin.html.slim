@@ -1,0 +1,25 @@
+doctype html
+html
+  title Napp
+  == stylesheet_link_tag    "admin", :media => "all"
+  == javascript_include_tag "application"
+  == csrf_meta_tags
+body
+  .container
+    .row
+      .span12
+        .navbar
+          .navbar-inner
+            ul.nav
+              li
+                a href="Start" Start
+              li
+                a href="#{admin_services_path}" Services
+              li
+                a href="#{edit_admin_site_layout_path}" Theme
+              li
+                a href="Domain" Domain
+              li
+                a href="Users" Users
+  .container
+    ==yield

@@ -1,0 +1,23 @@
+css:
+  .preview-iframe {
+    left:0;
+    position:absolute;
+    width:100%;
+    height:0px;
+    border:1px solid silver;
+  }
+
+==render 'tabs'
+iframe class="preview-iframe" src="/"
+javascript:
+
+  function resizePreview() {
+    var winHeight = $(window).height();
+    var previewTop = $('.preview-iframe').position().top;
+    var previewBorderSize = 2;
+    var previewHeight = winHeight - previewTop - previewBorderSize * 2;
+    $('.preview-iframe').height(previewHeight);
+  }
+  
+  $("body").css("overflow", "hidden");
+  $(window).ready(resizePreview).resize(resizePreview);

@@ -1,0 +1,19 @@
+ruby:
+  items = [
+    ["Customize Layout", edit_admin_site_layout_path],
+    ["Preview", preview_admin_site_layout_path]
+  ]
+  env_path = request.env['PATH_INFO']
+  
+  def item_class(env_path, path)
+    env_path == path ? 'active' : ''
+  end
+
+.row
+  .span12
+    ul.nav.nav-tabs
+      -items.each do |label,url|
+        li class="#{item_class(env_path, url)}"
+          a href="#{url}" =label
+
+        /li class="#{path==url ? 'active' : ''}"

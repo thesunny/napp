@@ -1,0 +1,10 @@
+- content_for :head do
+  title Napp
+  == stylesheet_link_tag    "application", :media => "all"
+  == javascript_include_tag "application"
+  == csrf_meta_tags
+  style== @site.layout_css
+- content_for :content do
+  #except-the-app
+    ==yield
+== Liquid::Template.parse(@site.layout).render('content' => yield(:content), 'head' => yield(:head))

@@ -1,0 +1,40 @@
+/
+  .container
+    .row
+      .span12
+        
+      .span8
+        ==yield
+
+==render 'tabs'    
+.row
+  .span4
+    .well
+      small
+        h4 Instructions
+        p
+          |
+            Copy and paste the HTML from your website into the "HTML for Layout"
+            field.
+        ul
+          li
+            |
+              Insert <code>{{head}}</code> at the top of the <code>&lt;head&gt;</code> section.
+          li
+            |
+              Insert <code>{{content}}</code> where you want content to appear.
+              This area should be at least 940px wide.
+          li
+            |
+              Make sure to update URLs for assets on your server like images,
+              stylesheets and javascript.
+              e.g. <code>&lt;img src="/logo.png"&gt;</code> should be changed to
+              <code>&lt;img src="//mysite.com/logo.png"&gt;</code>
+        h4 CSS
+        p
+          |
+            Optional: Add any custom CSS for your layout in the "CSS for Layout" field.
+  .span8
+    
+    h1 Customize Layout
+    == render 'form'

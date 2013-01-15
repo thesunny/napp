@@ -1,0 +1,48 @@
+h1 Editing Theme
+
+= simple_form_for @site do |f|
+
+  /
+    - if @site.errors.any?
+      #error_explanation
+        h2 = "#{pluralize(@site.errors.count, "error")} prohibited this layout from being saved:"
+        ul
+          - @site.errors.full_messages.each do |message|
+            li = message
+
+  ==f.input :layout, as: :text, label: 'HTML for Layout'
+  ==f.input :layout_css, as: :text, label: 'CSS for Layout'
+  
+  .field
+    input type="checkbox"
+    label for="" Disable built-in Bootstrap
+  
+  .actions = f.submit 'Save'
+
+/ CodeMirror Stuff
+script src="/codemirror/lib/codemirror.js"
+link rel="stylesheet" href="/codemirror/lib/codemirror.css"
+link rel="stylesheet" href="/codemirror/theme/twilight.css"
+script src="/codemirror/mode/css/css.js"
+script src="/codemirror/mode/xml/xml.js"
+script src="/codemirror/mode/javascript/javascript.js"
+script src="/codemirror/mode/css/css.js"
+script src="/codemirror/mode/htmlmixed/htmlmixed.js"
+javascript:
+  CodeMirror.fromTextArea(document.getElementById('site_layout'), {
+    theme: 'twilight',
+    mode: 'htmlmixed',
+    tabSize: 2,
+    indentWithTabs: false,
+    lineNumbers: true
+  });
+  CodeMirror.fromTextArea(document.getElementById('site_layout_css'), {
+    theme: 'twilight',
+    mode: 'css',
+    lineNumbers: true
+  });
+
+= link_to 'Show', @site
+'|
+= link_to 'Back', sites_path
+
