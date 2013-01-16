@@ -1,5 +1,7 @@
 class Site < ActiveRecord::Base
-  attr_accessible :name, :owner_id, :subdomain, :layout, :layout_css, :disable_bootstrap
+  attr_accessible :name, :owner_id, :owner, :subdomain, :layout, :layout_css, :disable_bootstrap
+  
+  belongs_to :owner, class_name: 'User'
   has_many :pages
   
   validates :name,

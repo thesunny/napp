@@ -10,10 +10,22 @@ Napp::Application.routes.draw do
 
   resources :sites
 
-  # constraints subdomain: /^super$/ do
-    # ActiveAdmin.routes(self)
-    # devise_for :admin_users, ActiveAdmin::Devise.config
-  # end
+  # super.domain.com/admin
+  constraints subdomain: /^super$/ do
+    ActiveAdmin.routes(self)
+    devise_for :admin_users, ActiveAdmin::Devise.config
+  end
+  
+  
+  if Rails.env.development?
+    # Run Scripts
+    # script.domain.com
+    constraints subdomain: /^script$/ do
+      root to: 'scripts#index', as: :scripts
+      get ':filename' => 'scripts#show', as: :script
+      post ':filename' => 'scripts#run', as: :run_script
+    end
+  end
   
   constraints Proc.new { |r| puts '-------------------------'; puts r.env; true } do
     scope '/:page_name' do
@@ -32,11 +44,10 @@ Napp::Application.routes.draw do
   
   match 'system/:action' => 'system'
 
-  match '', to: 'sites#show', constraints: {subdomain: /.+/}
+  root to: 'sites#show', constraints: {subdomain: /.+/}
   
   match 'admin' => 'sites#show'
   constraints subdomain: /.+/ do
-    
     
     resource :forum
     

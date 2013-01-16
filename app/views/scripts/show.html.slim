@@ -1,0 +1,24 @@
+ul.breadcrumb
+  li
+    ==link_to 'Scripts', scripts_path
+    span.divider
+      |/
+  li.active= @filename
+    
+
+h1= @filename
+
+form method="post"
+  input type="hidden" name="filename" value=@filename
+  button.btn.btn-primary#run-button Run This Code
+
+-if @error
+  .alert.alert-error
+    =@error
+
+pre
+  =@content
+  
+/ coffee:
+  $('#run-button').click ->
+    alert('clicked!')
